@@ -4,5 +4,5 @@ var port = 1337;
 
 app.use(express.static(__dirname + '/client'));
 
-console.log('HR Game Hackathon Demo Listening on port ' + port);
+console.log('Global Game Jam Demo Listening on Port ' + port);
 app.listen(port);
