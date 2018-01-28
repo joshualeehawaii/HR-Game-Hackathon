@@ -18,7 +18,7 @@ body {
 .header {
   grid-column: span 3;
   height: 100px;
-  display: grid;
+  display: inline-grid;
   grid-gap: 5px;
   grid-template-columns: repeat(3, 1fr);
 }
@@ -36,6 +36,12 @@ body {
   box-shadow: 7px 3px 112px 5px rgba(168, 168, 168, 1);
 }
 
+.gameContainer {
+  -webkit-box-shadow: 0px 0px 24px 14px rgba(250, 247, 250, 0.93);
+  -moz-box-shadow: 0px 0px 24px 14px rgba(250, 247, 250, 0.93);
+  box-shadow: 0px 0px 24px 14px rgba(250, 247, 250, 0.93);
+}
+
 .title {
   width: 800px;
   grid-column-start: 2;
@@ -46,14 +52,14 @@ body {
   font-family: 'Pacifico', cursive;
 }
 
-.left {
+.titleText {
+  width: 350px;
+}
+.tagText {
+  width: 350px;
 }
 
 .gameContainer {
   width: 800px;
   margin-top: 5%;
 }
-
-.right {
-}
-
