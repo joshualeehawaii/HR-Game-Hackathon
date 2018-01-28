@@ -52,13 +52,6 @@ body {
   font-family: 'Pacifico', cursive;
 }
 
-.titleText {
-  width: 350px;
-}
-.tagText {
-  width: 350px;
-}
-
 .gameContainer {
   width: 800px;
   margin-top: 5%;
