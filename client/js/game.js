@@ -25,7 +25,8 @@ function create() {
   game.physics.startSystem(Phaser.Physics.ARCADE);
 
   //Background
-  game.add.sprite(0, 0, 'sky');
+  var sky = game.add.sprite(0, 0, 'sky');
+  sky.alpha = 0.3;
 
   //The platforms group contains the ground and the 2 ledges we can jump on
   platforms = game.add.group();
@@ -34,24 +35,25 @@ function create() {
   platforms.enableBody = true;
 
   //Create the ground.
-  var ground = platforms.create(0, game.world.height - 64, 'ground');
+  var ground = platforms.create(0, game.world.height - 55, 'ground');
 
   //Scale it to fit the width of the game.S
-  ground.scale.setTo(2, 2);
+  ground.scale.setTo(1, 1);
 
   //This stops it from falling away when you jump on it.
   ground.body.immovable = true;
 
-  //Two ledges.
-  var ledge = platforms.create(400, 400, 'ground');
-  ledge.body.immovable = true;
+  // //Two ledges.
+  // var ledge = platforms.create(400, 400, 'ground');
+  // ledge.body.immovable = true;
 
-  ledge = platforms.create(-150, 250, 'ground');
-  ledge.body.immovable = true;
+  // ledge = platforms.create(-150, 250, 'ground');
+  // ledge.body.immovable = true;
 
   //The player and its settings
   player = game.add.sprite(100, 245, 'dude');
 
+  //The player scale
   player.scale.setTo(0.3, 0.3);
 
   //Physics on the player
@@ -62,7 +64,7 @@ function create() {
   player.body.gravity.y = 300;
   player.body.collideWorldBounds = true;
 
-  //batterys to collect.
+  //Battery to collect.
   batterys = game.add.group();
 
   //Physics for any battery that is created in this group.
@@ -87,7 +89,7 @@ function create() {
   //Here we'll create 12 of them evenly spaced apart.
   for (var j = 0; j < 12; j++) {
     //Create a astroid inside of the 'astroids' group.
-    var astroid = astroids.create(j * 70, 0, 'astroid');
+    var astroid = astroids.create(j * 100, 0, 'astroid');
 
     //Let gravity do its thing.
     astroid.body.gravity.y = 40;
@@ -97,7 +99,7 @@ function create() {
   scoreText = game.add.text(16, 25, 'Collect Battery', {
     font: '15pt Courier',
     fill: 'white',
-    stroke: '#119f4e',
+    stroke: 'gray',
     strokeThickness: 2,
   });
 
