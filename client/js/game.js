@@ -10,6 +10,7 @@ function preload() {
   game.load.image('battery', 'assets/battery.png');
   game.load.image('astroid', 'assets/astroid.png');
   game.load.image('dude', 'assets/dude.png');
+  game.load.image('lander', 'assets/lander.png');
 }
 
 var player;
@@ -21,81 +22,58 @@ var score = 0;
 var scoreText;
 
 function create() {
-  //Arcade Physics system
   game.physics.startSystem(Phaser.Physics.ARCADE);
 
-  //Background
+  // BACKGROUND
   var sky = game.add.sprite(0, 0, 'sky');
   sky.alpha = 0.3;
 
-  //The platforms group contains the ground and the 2 ledges we can jump on
+  // PLATFORMS
   platforms = game.add.group();
-
-  //Physics for any object that is created in this group
   platforms.enableBody = true;
 
-  //Create the ground.
+  // GROUND
   var ground = platforms.create(0, game.world.height - 55, 'ground');
-
-  //Scale it to fit the width of the game.S
   ground.scale.setTo(1, 1);
-
-  //This stops it from falling away when you jump on it.
   ground.body.immovable = true;
 
   // //Two ledges.
   // var ledge = platforms.create(400, 400, 'ground');
   // ledge.body.immovable = true;
-
   // ledge = platforms.create(-150, 250, 'ground');
   // ledge.body.immovable = true;
 
-  //The player and its settings
-  player = game.add.sprite(100, 245, 'dude');
-
-  //The player scale
+  // PLAYER
+  player = game.add.sprite(800, 1, 'dude');
   player.scale.setTo(0.3, 0.3);
-
-  //Physics on the player
   game.physics.arcade.enable(player);
-
-  //Player physics properties: slight bounce.
   player.body.bounce.y = 0.2;
   player.body.gravity.y = 300;
   player.body.collideWorldBounds = true;
 
-  //Battery to collect.
+  // BATTERY
   batterys = game.add.group();
-
-  //Physics for any battery that is created in this group.
   batterys.enableBody = true;
+  batterys.scale.setTo(1, 1);
+  var battery = batterys.create(300, 345, 'battery');
 
-  //Battery
-  for (var i = 0; i < 1; i++) {
-    //Create a battery inside of the 'batterys' group.
-    var battery = batterys.create(i * 70, 0, 'battery');
+  // LANDER
+  landers = game.add.group();
+  landers.enableBody = true;
+  landers.scale.setTo(0.3, 0.3);
+  var lander = landers.create(400, 500, 'lander');
 
-    //Let gravity do its thing
-    battery.body.gravity.y = 300;
-
-    //This just gives each battery a slightly random bounce value.
-    battery.body.bounce.y = 0.7 + Math.random() * 0.2;
-  }
-
+  // ASTROIDS
   astroids = game.add.group();
-
   astroids.enableBody = true;
-
-  //Here we'll create 12 of them evenly spaced apart.
-  for (var j = 0; j < 12; j++) {
+  astroids.scale.setTo(0.2, 0.2);
+  for (var j = 0; j < 2; j++) {
     //Create a astroid inside of the 'astroids' group.
-    var astroid = astroids.create(j * 100, 0, 'astroid');
-
-    //Let gravity do its thing.
+    var astroid = astroids.create(j * 200, 0, 'astroid');
     astroid.body.gravity.y = 40;
   }
 
-  //The score.
+  // SCORE
   scoreText = game.add.text(16, 25, 'Collect Battery', {
     font: '15pt Courier',
     fill: 'white',
@@ -103,7 +81,7 @@ function create() {
     strokeThickness: 2,
   });
 
-  //Our controls.
+  // CONTROLS
   cursors = game.input.keyboard.createCursorKeys();
 }
 
@@ -156,7 +134,6 @@ function die(player, astroid) {
   //Player dies and restarts the game.
   player.kill();
   astroid.kill();
-  create();
 
   //Add and update the score.
   score = 'Battery Collected';
